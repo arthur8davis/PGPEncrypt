@@ -42,11 +42,9 @@ class EncryptFilePGP:
 
     def __read_message(self):
         self.load_message_dec = PGPMessage.from_file(self.file_input_dec)
-        print(self.load_message_dec)
 
     def __decrypt_content(self):
-        msg_tmp = self.private_key.decrypt(self.load_message_dec)
-        self.message_decrypt = msg_tmp.message
+        self.message_decrypt = self.private_key.decrypt(self.load_message_dec).message
 
     def __write_file_decrypt(self):
         with open(self.file_output_dec, 'wb') as f:
