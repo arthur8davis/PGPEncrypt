@@ -1,5 +1,6 @@
 from pgpy.constants import PubKeyAlgorithm, KeyFlags, HashAlgorithm, SymmetricKeyAlgorithm, CompressionAlgorithm
 from pgpy import PGPKey, PGPUID
+from datetime import datetime, timedelta
 
 # Generate new key
 new_key = PGPKey.new(PubKeyAlgorithm.RSAEncryptOrSign, 4096)
@@ -10,7 +11,8 @@ new_key.add_uid(uid, usage={KeyFlags.Sign, KeyFlags.EncryptCommunications, KeyFl
                 hashes=[HashAlgorithm.SHA256, HashAlgorithm.SHA384, HashAlgorithm.SHA512, HashAlgorithm.SHA224],
                 ciphers=[SymmetricKeyAlgorithm.AES256, SymmetricKeyAlgorithm.AES192, SymmetricKeyAlgorithm.AES128],
                 compression=[CompressionAlgorithm.ZLIB, CompressionAlgorithm.BZ2, CompressionAlgorithm.ZIP,
-                             CompressionAlgorithm.Uncompressed])
+                             CompressionAlgorithm.Uncompressed],
+                key_expiration=timedelta(days=730))
 
 # Generate  private and public key
 private_key = new_key
